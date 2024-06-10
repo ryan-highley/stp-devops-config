@@ -15,7 +15,7 @@ spec:
           requests:
             storage: 1Gi
   users:
-    - name: gitea_user
+    - name: gitea-user
       databases:
         - giteadb
       options: 'SUPERUSER'
