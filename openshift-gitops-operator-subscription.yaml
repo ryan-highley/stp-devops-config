@@ -7,7 +7,7 @@ metadata:
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
-  generateName: openshift-gitops-operator-
+  name: openshift-gitops-operator
   namespace: openshift-gitops-operator
 spec:
   upgradeStrategy: Default
@@ -25,5 +25,4 @@ spec:
   name: openshift-gitops-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: openshift-gitops-operator.v1.12.3
 ---
