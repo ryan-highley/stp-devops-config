@@ -24,9 +24,9 @@ spec:
   giteaAdminUser: admin
   giteaDisableSsh: false
   giteaPostgresqlDatabaseName: giteadb
-  giteaPostgresqlPassword: Qgs4C0MDdlkK2fup
+  giteaPostgresqlPassword: giteapassword
   giteaPostgresqlServiceName: gitea-pgsql.gitea-repo.svc
-  giteaPostgresqlUser: userIAE
+  giteaPostgresqlUser: giteauser
   giteaSsl: true
   giteaStartSshServer: true
   giteaVolumeSize: 4Gi

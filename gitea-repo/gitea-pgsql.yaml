@@ -45,8 +45,8 @@ metadata:
   namespace: gitea-repo
 stringData:
   database-name: giteadb
-  database-password: Qgs4C0MDdlkK2fup
-  database-user: userIAE
+  database-password: giteapassword
+  database-user: giteauser
 ---
 apiVersion: v1
 kind: Service
@@ -111,8 +111,7 @@ spec:
         deployment: pgsql-gitea
     spec:
       containers:
-      - capabilities: {}
-        env:
+      - env:
         - name: POSTGRESQL_USER
           valueFrom:
             secretKeyRef:
