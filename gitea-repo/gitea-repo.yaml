@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gitea-admin-password
+  namespace: gitea
+type: Opaque
+data:
+  password: cjNkaDR0MSE=
+---
+apiVersion: pfe.rhpds.com/v1
+kind: Gitea
+metadata:
+  name: gitea-repo
+  namespace: gitea
+spec:
+  giteaAdminEmail: opentlc-mgr@redhat.com
+  giteaAdminPasswordExpose: false
+  giteaAdminPasswordSecretName: gitea-admin-password
+  giteaAdminUser: admin
+  giteaDisableSsh: false
+  giteaPostgresqlDatabaseName: giteadb
+  giteaPostgresqlPassword: gitea_pass
+  giteaPostgresqlServiceName: gitea-pgsql.gitea.svc
+  giteaPostgresqlUser: gitea_user
+  giteaSsl: true
+  giteaStartSshServer: true
+  giteaVolumeSize: 4Gi
+  postgresqlSetup: false
+---

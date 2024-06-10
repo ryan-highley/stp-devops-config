@@ -1,0 +1,40 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: gitea-repo
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Gitea Repo Project
+  sourceRepos:
+    - '*'
+  destinations:
+    - namespace: gitea-repo
+      server: https://kubernetes.default.svc
+      name: in-cluster
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitea-repo
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: gitea-repo
+    server: https://kubernetes.default.svc
+  project: gitea-repo
+  source:
+    directory:
+      recurse: true
+    path: gitea-repo
+    repoURL: git@github.com:ryan-highley/stp-devops-config.git
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+---
