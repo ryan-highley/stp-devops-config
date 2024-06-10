@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: gitea-admin-password
-  namespace: gitea
+  namespace: gitea-repo
 type: Opaque
 data:
   password: cjNkaDR0MSE=
@@ -12,7 +12,7 @@ apiVersion: pfe.rhpds.com/v1
 kind: Gitea
 metadata:
   name: gitea-repo
-  namespace: gitea
+  namespace: gitea-repo
 spec:
   giteaAdminEmail: opentlc-mgr@redhat.com
   giteaAdminPasswordExpose: false
