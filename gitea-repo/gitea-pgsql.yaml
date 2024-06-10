@@ -1,154 +1,167 @@
 ---
-apiVersion: postgres-operator.crunchydata.com/v1beta1
-kind: PostgresCluster
-metadata:
-  name: giteadb
-spec:
-  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-16.3-1
-  postgresVersion: 16
-  instances:
-    - name: gitea-instance
-      dataVolumeClaimSpec:
-        accessModes:
-        - "ReadWriteOnce"
-        resources:
-          requests:
-            storage: 1Gi
-  backups: {}
-  users:
-    - name: gitea-user
-      databases:
-        - giteadb
-      options: 'SUPERUSER'
----
-
-# apiVersion: apps.openshift.io/v1
-# kind: DeploymentConfig
+# apiVersion: postgres-operator.crunchydata.com/v1beta1
+# kind: PostgresCluster
 # metadata:
-#   annotations:
-#     template.alpha.openshift.io/wait-for-ready: "true"
-#   creationTimestamp: "2024-06-06T18:54:00Z"
-#   generation: 2
-#   labels:
-#     template: postgresql-persistent-template
-#     template.openshift.io/template-instance-owner: a946a1c6-400e-4da4-823b-1eefe714225d
-#   name: gitea-pgsql
-#   namespace: gitea
-#   resourceVersion: "65060"
-#   uid: 64832ab4-c641-417d-bbfd-864ec7087bcb
+#   name: giteadb
 # spec:
-#   replicas: 1
-#   revisionHistoryLimit: 10
-#   selector:
-#     name: gitea-pgsql
-#   strategy:
-#     activeDeadlineSeconds: 21600
-#     recreateParams:
-#       timeoutSeconds: 600
-#     resources: {}
-#     type: Recreate
-#   template:
-#     metadata:
-#       creationTimestamp: null
-#       labels:
-#         name: gitea-pgsql
-#     spec:
-#       containers:
-#       - env:
-#         - name: POSTGRESQL_USER
-#           valueFrom:
-#             secretKeyRef:
-#               key: database-user
-#               name: gitea-pgsql
-#         - name: POSTGRESQL_PASSWORD
-#           valueFrom:
-#             secretKeyRef:
-#               key: database-password
-#               name: gitea-pgsql
-#         - name: POSTGRESQL_DATABASE
-#           valueFrom:
-#             secretKeyRef:
-#               key: database-name
-#               name: gitea-pgsql
-#         image: image-registry.openshift-image-registry.svc:5000/openshift/postgresql@sha256:ed2da0eed3f495f5455f490cdf7f7943420f64b0cf541271a2d315a3f9e9744c
-#         imagePullPolicy: IfNotPresent
-#         livenessProbe:
-#           exec:
-#             command:
-#             - /usr/libexec/check-container
-#             - --live
-#           failureThreshold: 3
-#           initialDelaySeconds: 120
-#           periodSeconds: 10
-#           successThreshold: 1
-#           timeoutSeconds: 10
-#         name: postgresql
-#         ports:
-#         - containerPort: 5432
-#           protocol: TCP
-#         readinessProbe:
-#           exec:
-#             command:
-#             - /usr/libexec/check-container
-#           failureThreshold: 3
-#           initialDelaySeconds: 5
-#           periodSeconds: 10
-#           successThreshold: 1
-#           timeoutSeconds: 1
+#   image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-16.3-1
+#   postgresVersion: 16
+#   instances:
+#     - name: gitea-instance
+#       dataVolumeClaimSpec:
+#         accessModes:
+#         - "ReadWriteOnce"
 #         resources:
-#           limits:
-#             memory: 512Mi
-#         securityContext:
-#           capabilities: {}
-#           privileged: false
-#         terminationMessagePath: /dev/termination-log
-#         terminationMessagePolicy: File
-#         volumeMounts:
-#         - mountPath: /var/lib/pgsql/data
-#           name: gitea-pgsql-data
-#       dnsPolicy: ClusterFirst
-#       restartPolicy: Always
-#       schedulerName: default-scheduler
-#       securityContext: {}
-#       terminationGracePeriodSeconds: 30
-#       volumes:
-#       - name: gitea-pgsql-data
-#         persistentVolumeClaim:
-#           claimName: gitea-pgsql
-#   test: false
-#   triggers:
-#   - imageChangeParams:
-#       automatic: true
-#       containerNames:
-#       - postgresql
-#       from:
-#         kind: ImageStreamTag
-#         name: postgresql:10-el8
-#         namespace: openshift
-#       lastTriggeredImage: image-registry.openshift-image-registry.svc:5000/openshift/postgresql@sha256:ed2da0eed3f495f5455f490cdf7f7943420f64b0cf541271a2d315a3f9e9744c
-#     type: ImageChange
-#   - type: ConfigChange
-# status:
-#   availableReplicas: 1
-#   conditions:
-#   - lastTransitionTime: "2024-06-06T18:54:35Z"
-#     lastUpdateTime: "2024-06-06T18:54:35Z"
-#     message: Deployment config has minimum availability.
-#     status: "True"
-#     type: Available
-#   - lastTransitionTime: "2024-06-06T18:54:37Z"
-#     lastUpdateTime: "2024-06-06T18:54:37Z"
-#     message: replication controller "gitea-pgsql-1" successfully rolled out
-#     reason: NewReplicationControllerAvailable
-#     status: "True"
-#     type: Progressing
-#   details:
-#     causes:
-#     - type: ConfigChange
-#     message: config change
-#   latestVersion: 1
-#   observedGeneration: 2
-#   readyReplicas: 1
-#   replicas: 1
-#   unavailableReplicas: 0
-#   updatedReplicas: 1
+#           requests:
+#             storage: 1Gi
+#   backups:
+#     pgbackrest:
+#       image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.51-1
+#       repos:
+#       - name: gitea-repo-backup
+#         volume:
+#           volumeClaimSpec:
+#             accessModes:
+#             - "ReadWriteOnce"
+#             resources:
+#               requests:
+#                 storage: 1Gi
+#   users:
+#     - name: gitea-user
+#       databases:
+#         - giteadb
+#       options: 'SUPERUSER'
+# ---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    template.openshift.io/expose-database_name: '{.data[''database-name'']}'
+    template.openshift.io/expose-password: '{.data[''database-password'']}'
+    template.openshift.io/expose-username: '{.data[''database-user'']}'
+  labels:
+    app: gitea-repo
+  name: pgsql-gitea
+  namespace: gitea-repo
+stringData:
+  database-name: giteadb
+  database-password: Qgs4C0MDdlkK2fup
+  database-user: userIAE
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    template.openshift.io/expose-uri: postgres://{.spec.clusterIP}:{.spec.ports[?(.name=="postgresql")].port}
+  labels:
+    app: gitea-repo
+  name: gitea-pgsql
+  namespace: gitea-repo
+spec:
+  ports:
+  - name: postgresql
+    nodePort: 0
+    port: 5432
+    protocol: TCP
+    targetPort: 5432
+  selector:
+    name: pgsql-gitea
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pgsql-gitea
+  namespace: gitea-repo
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pgsql-gitea
+    app.kubernetes.io/component: pgsql-gitea
+    app.kubernetes.io/instance: pgsql-gitea
+    app.kubernetes.io/name: pgsql-gitea
+    app.kubernetes.io/part-of: gitea-repo
+    app.openshift.io/runtime: postgresql
+    app.openshift.io/runtime-namespace: openshift
+    app.openshift.io/runtime-version: 15-el9
+  name: pgsql-gitea
+  namespace: gitea-repo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgsql-gitea
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: pgsql-gitea
+        deployment: pgsql-gitea
+    spec:
+      containers:
+      - capabilities: {}
+        env:
+        - name: POSTGRESQL_USER
+          valueFrom:
+            secretKeyRef:
+              key: database-user
+              name: pgsql-gitea
+        - name: POSTGRESQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: database-password
+              name: pgsql-gitea
+        - name: POSTGRESQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: database-name
+              name: pgsql-gitea
+        image: image-registry.openshift-image-registry.svc:5000/openshift/postgresql:15-el9
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - /usr/libexec/check-container
+            - --live
+          initialDelaySeconds: 120
+          timeoutSeconds: 10
+        name: pgsql-gitea
+        ports:
+        - containerPort: 5432
+          protocol: TCP
+        readinessProbe:
+          exec:
+            command:
+            - /usr/libexec/check-container
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: 500m
+        securityContext:
+          capabilities: {}
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/pgsql/data
+          name: postgresql-data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      volumes:
+      - name: postgresql-data
+        persistentVolumeClaim:
+          claimName: postgresql

@@ -4,6 +4,8 @@ kind: Secret
 metadata:
   name: gitea-admin-password
   namespace: gitea-repo
+  labels:
+    app: gitea-repo
 type: Opaque
 data:
   password: cjNkaDR0MSE=
@@ -13,6 +15,8 @@ kind: Gitea
 metadata:
   name: gitea-repo
   namespace: gitea-repo
+  labels:
+    app: gitea-repo
 spec:
   giteaAdminEmail: opentlc-mgr@redhat.com
   giteaAdminPasswordExpose: false
