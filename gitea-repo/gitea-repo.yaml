@@ -21,7 +21,7 @@ spec:
   giteaDisableSsh: false
   giteaPostgresqlDatabaseName: giteadb
   giteaPostgresqlPassword: gitea-pass
-  giteaPostgresqlServiceName: gitea-pgsql.gitea.svc
+  giteaPostgresqlServiceName: gitea-pgsql.gitea-repo.svc
   giteaPostgresqlUser: gitea-user
   giteaSsl: true
   giteaStartSshServer: true
