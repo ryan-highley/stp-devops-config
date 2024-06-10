@@ -4,7 +4,9 @@ kind: Namespace
 metadata:
   name: gitea-repo
   labels:
-    argocd.argoproj.io/managed-by=openshift-gitops
+    app.kubernetes.io/managed-by: openshift-gitops
+    app.kubernetes.io/name: gitea-repo
+    app.kubernetes.io/part-of: gitea-repo
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
