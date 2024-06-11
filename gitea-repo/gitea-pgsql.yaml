@@ -40,7 +40,7 @@ metadata:
     template.openshift.io/expose-password: '{.data[''database-password'']}'
     template.openshift.io/expose-username: '{.data[''database-user'']}'
   labels:
-    app: gitea-repo
+    app: pgsql-gitea
   name: pgsql-gitea
   namespace: gitea-repo
 stringData:
@@ -54,7 +54,7 @@ metadata:
   annotations:
     template.openshift.io/expose-uri: postgres://{.spec.clusterIP}:{.spec.ports[?(.name=="postgresql")].port}
   labels:
-    app: gitea-repo
+    app: pgsql-gitea
   name: gitea-pgsql
   namespace: gitea-repo
 spec:
@@ -76,6 +76,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: pgsql-gitea
   namespace: gitea-repo
+  labels:
+    app: pgsql-gitea
 spec:
   accessModes:
   - ReadWriteOnce
