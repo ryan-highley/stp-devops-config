@@ -32,7 +32,7 @@ spec:
     protocol: TCP
     targetPort: 5432
   selector:
-    name: pgsql-gitea
+    app: pgsql-gitea
   sessionAffinity: None
   type: ClusterIP
 status:
