@@ -8,7 +8,7 @@ metadata:
     app: gitea-repo
 type: Opaque
 data:
-  password: cjNkaDR0MSE=
+  adminPassword: cjNkaDR0MSE=
 ---
 apiVersion: pfe.rhpds.com/v1
 kind: Gitea
