@@ -21,7 +21,7 @@ spec:
   giteaAdminEmail: opentlc-mgr@redhat.com
   giteaAdminPasswordExpose: false
   giteaAdminPasswordSecretName: gitea-admin-password
-  giteaAdminUser: admin
+  giteaAdminUser: opentlc-mgr
   giteaDisableSsh: false
   giteaPostgresqlDatabaseName: giteadb
   giteaPostgresqlPassword: giteapassword
