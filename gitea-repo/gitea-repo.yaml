@@ -31,4 +31,3 @@ spec:
   giteaStartSshServer: true
   giteaVolumeSize: 4Gi
   postgresqlSetup: false
----

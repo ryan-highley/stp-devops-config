@@ -1,37 +1,4 @@
 ---
-# apiVersion: postgres-operator.crunchydata.com/v1beta1
-# kind: PostgresCluster
-# metadata:
-#   name: giteadb
-# spec:
-#   image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-16.3-1
-#   postgresVersion: 16
-#   instances:
-#     - name: gitea-instance
-#       dataVolumeClaimSpec:
-#         accessModes:
-#         - "ReadWriteOnce"
-#         resources:
-#           requests:
-#             storage: 1Gi
-#   backups:
-#     pgbackrest:
-#       image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.51-1
-#       repos:
-#       - name: gitea-repo-backup
-#         volume:
-#           volumeClaimSpec:
-#             accessModes:
-#             - "ReadWriteOnce"
-#             resources:
-#               requests:
-#                 storage: 1Gi
-#   users:
-#     - name: gitea-user
-#       databases:
-#         - giteadb
-#       options: 'SUPERUSER'
-# ---
 apiVersion: v1
 kind: Secret
 metadata:
