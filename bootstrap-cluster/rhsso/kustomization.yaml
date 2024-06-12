@@ -9,6 +9,14 @@ resources:
 
 patches:
   - target:
+      kind: Namespace
+      name: sso
+      version: v1
+    patch: |-
+      - op: add
+        path: /metadata/labels
+        value: { "argocd.argoproj.io/managed-by": "openshift-gitops" }
+  - target:
       group: keycloak.org
       kind: KeycloakClient
       name: openshift-client
