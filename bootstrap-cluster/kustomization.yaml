@@ -18,6 +18,9 @@ patches:
       - op: replace
         path: /spec/client/redirectUris
         value: ["https://oauth-openshift.apps.rosa-xp6q5.9ha5.p1.openshiftapps.com/oauth2callback/rhsso"]
+      - op: add
+        path: /metadata/namespace
+        value: sso
   - target:
       group: config.openshift.io
       kind: OAuth
