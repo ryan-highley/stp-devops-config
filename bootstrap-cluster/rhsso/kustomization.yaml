@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: sso
+
+resources:
+  - https://github.com/redhat-cop/gitops-catalog/rhsso/rhsso-standalone/overlays/default?ref=main
+  - https://github.com/redhat-cop/gitops-catalog/rhsso/instance/overlays/rhpds?ref=main
+
+patches:
+  - target:
+      group: keycloak.org
+      kind: KeycloakClient
+      name: openshift-client
+      version: v1alpha1
+    patch: |-
+      - op: replace
+        path: /spec/client/redirectUris
+        value: ["https://oauth-openshift.apps.rosa-xp6q5.9ha5.p1.openshiftapps.com/oauth2callback/rhsso"]
+  - target:
+      group: config.openshift.io
+      kind: OAuth
+      name: cluster
+      version: v1
+    patch: |-
+      - op: replace
+        path: /spec/identityProviders/0/openID/issuer
+        value: https://keycloak-sso.apps.rosa-xp6q5.9ha5.p1.openshiftapps.com/auth/realms/openshift
