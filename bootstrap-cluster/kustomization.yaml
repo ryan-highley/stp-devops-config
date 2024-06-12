@@ -5,6 +5,7 @@ resources:
   - openshift-gitops.yaml
   - gitea-operator-subscription.yaml
   - gitea-argocd-app.yaml
+  - sso-namespace.yaml
   - https://github.com/redhat-cop/gitops-catalog/rhsso/rhsso-standalone/overlays/default?ref=main
   - https://github.com/redhat-cop/gitops-catalog/rhsso/instance/overlays/rhpds?ref=main
 
