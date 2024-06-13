@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: keycloak
+
+resources:
+  - https://github.com/redhat-cop/gitops-catalog/redhat-keycloak/operator/overlays/stable-v22?ref=main
+
+patches:
+  - target:
+      kind: Namespace
+      name: keycloak
+      version: v1
+    patch: |-
+      - op: add
+        path: /metadata/labels
+        value: { "argocd.argoproj.io/managed-by": "openshift-gitops" }
+  - patch: |-
+      - op: replace
+        path: /spec/channel
+        value: 'stable-v24'
+    target:
+      kind: Subscription
+      name: rhbk-operator
+      namespace: keycloak
