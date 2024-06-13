@@ -31,6 +31,23 @@ kind: Namespace
 metadata:
   name: openshift-gitops
 ---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  annotations:
+    managed-by: argocd.argoproj.io
+  labels:
+    argocd.argoproj.io/secret-type: repository
+  name: stp-devops-config-repo
+  namespace: openshift-gitops
+data:
+  name: c3RwLWRldm9wcy1jb25maWc=
+  project: Kg==
+  sshPrivateKey: ***REMOVED***
+  type: Z2l0
+  url: Z2l0QGdpdGh1Yi5jb206cnlhbi1oaWdobGV5L3N0cC1kZXZvcHMtY29uZmlnLmdpdA==
+---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
@@ -39,13 +56,16 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
   description: Cluster GitOps Bootstrap App
-  sourceRepos:
-    - '*'
   destinations:
-    - namespace: openshift-gitops
+    - namespace: '*'
       server: https://kubernetes.default.svc
       name: in-cluster
+  sourceRepos:
+    - '*'
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application

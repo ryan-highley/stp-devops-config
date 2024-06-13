@@ -15,12 +15,15 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   description: Gitea Repo Project
-  sourceRepos:
-    - '*'
   destinations:
     - namespace: gitea-repo
       server: https://kubernetes.default.svc
       name: in-cluster
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  sourceRepos:
+    - '*'
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
