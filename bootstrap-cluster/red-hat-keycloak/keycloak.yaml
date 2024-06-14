@@ -12,3 +12,6 @@ spec:
   ingress:
     enabled: true
     className: openshift-default
+  hostname:
+    strict: false
+    strictBackchannel: false
