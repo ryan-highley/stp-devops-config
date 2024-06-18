@@ -4,7 +4,6 @@ metadata:
   labels:
     app: sso
   name: stp-devops-keycloak
-  namespace: keycloak
 spec:
   http:
     tlsSecret: demo-tls-secret
