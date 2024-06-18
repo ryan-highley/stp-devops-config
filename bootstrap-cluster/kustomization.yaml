@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./gitea
   - ./openshift-gitops
-  - ./red-hat-keycloak
+  - ./keycloak

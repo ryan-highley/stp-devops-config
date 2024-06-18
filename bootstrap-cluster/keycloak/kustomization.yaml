@@ -3,22 +3,9 @@ kind: Kustomization
 
 namespace: keycloak
 
-generatorOptions:
-  annotations:
-    argocd.argoproj.io/compare-options: IgnoreExtraneous
-    argocd.argoproj.io/sync-options: Prune=false
-  disableNameSuffixHash: true
-
-secretGenerator:
-  - files:
-      - tls.crt=demo-tls/certificate.pem
-      - tls.key=demo-tls/key.pem
-    name: demo-tls-secret
-    type: kubernetes.io/tls
-
 resources:
   - https://github.com/redhat-cop/gitops-catalog/redhat-keycloak/operator/overlays/stable-v22?ref=main
-  - keycloak.yaml
+  - keycloak-argocd-app.yaml
 
 patches:
   - patch: |-
