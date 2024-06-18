@@ -1,8 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: keycloak
-
 resources:
   - https://github.com/redhat-cop/gitops-catalog/redhat-keycloak/operator/overlays/stable-v22?ref=main
   - keycloak-argocd-app.yaml
