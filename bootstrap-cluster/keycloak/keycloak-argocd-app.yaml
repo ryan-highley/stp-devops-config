@@ -1,0 +1,35 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: keycloak
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Keycloak Project
+  destinations:
+    - namespace: keycloak
+      server: https://kubernetes.default.svc
+      name: in-cluster
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  sourceRepos:
+    - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: keycloak
+    server: https://kubernetes.default.svc
+  project: keycloak
+  source:
+    path: red-hat-keycloak
+    repoURL: https://github.com/ryan-highley/stp-devops-config.git
+    targetRevision: HEAD
+---
