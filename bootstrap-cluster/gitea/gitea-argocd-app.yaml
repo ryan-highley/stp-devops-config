@@ -39,6 +39,6 @@ spec:
     directory:
       recurse: true
     path: gitea-repo
-    repoURL: git@github.com:ryan-highley/stp-devops-config.git
+    repoURL: https://github.com/ryan-highley/stp-devops-config.git
     targetRevision: HEAD
 ---
