@@ -17,11 +17,18 @@ secretGenerator:
     type: kubernetes.io/tls
 
 resources:
-  - namespace.yaml
   - https://github.com/redhat-cop/gitops-catalog/redhat-keycloak/operator/overlays/stable-v22?ref=main
   - keycloak.yaml
 
 patches:
+  - patch: |-
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: keycloak
+        labels:
+          argocd.argoproj.io/managed-by: openshift-gitops
+          openshift.io/cluster-monitoring: "true"
   - patch: |-
       - op: replace
         path: /spec/channel
