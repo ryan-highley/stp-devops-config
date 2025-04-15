@@ -9,12 +9,6 @@ generatorOptions:
     argocd.argoproj.io/sync-options: Prune=false
   disableNameSuffixHash: true
 
-secretGenerator:
-  - files:
-      - tls.crt=demo-tls/certificate.pem
-      - tls.key=demo-tls/key.pem
-    name: demo-tls-secret
-    type: kubernetes.io/tls
-
 resources:
+  - keycloak-tls-cert.yaml
   - keycloak.yaml
