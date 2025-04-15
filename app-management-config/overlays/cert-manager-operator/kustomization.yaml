@@ -12,9 +12,9 @@ patches:
       apiVersion: argoproj.io/v1alpha1
       kind: AppProject
       metadata:
-        name: cert-manager
+        name: cert-manager-operator
       spec:
-        description: 'cert-manager Project'
+        description: 'cert-manager-operator Project'
     options:
       allowNameChange: true
 

@@ -3,5 +3,6 @@ kind: Kustomization
 
 resources:
   - ../openshift-gitops
+  - ../cert-manager-operator
   - ../cert-manager
   - ../red-hat-keycloak
