@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: stp-devops-keycloak
+
+resources:
+  - Subscription_rhbk-operator.yaml
+  - Certificate_demo-tls.yaml
+  - Keycloak_stp-devops-keycloak.yaml

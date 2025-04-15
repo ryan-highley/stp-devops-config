@@ -1,0 +1,33 @@
+apiVersion: builtin
+kind: ReplacementTransformer
+metadata:
+  name: base-replacement-transformer
+replacements:
+  - source:
+      kind: AppProject
+      fieldPath: metadata.name
+    targets:
+      - select:
+          kind: AppProject
+        fieldPaths:
+          - spec.destinations.0.namespace
+      - select:
+          kind: Application
+        fieldPaths:
+          - metadata.name
+          - spec.project
+      - select:
+          kind: Application
+        fieldPaths:
+          - spec.source.path
+        options:
+          delimiter: '/'
+          index: 99
+  - source:
+      kind: AppProject
+      fieldPath: spec.destinations.0.namespace
+    targets:
+      - select:
+          kind: Application
+        fieldPaths:
+          - spec.destination.namespace

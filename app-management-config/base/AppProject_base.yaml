@@ -2,14 +2,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: gitlab-system
-  namespace: openshift-gitops
+  name: PLACEHOLDER
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: GitLab Repo Project
+  description: PLACEHOLDER
   destinations:
-    - namespace: gitlab-system
+    - namespace: PLACEHOLDER
       server: https://kubernetes.default.svc
       name: in-cluster
   namespaceResourceWhitelist:
@@ -21,19 +20,18 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: gitlab-system
-  namespace: openshift-gitops
+  name: PLACEHOLDER
 spec:
   destination:
-    namespace: gitlab-system
+    namespace: PLACEHOLDER
     server: https://kubernetes.default.svc
-  project: gitlab-system
+  project: PLACEHOLDER
   source:
-    directory:
-      recurse: true
-    path: gitlab-system
+    path: apps
     repoURL: https://github.com/ryan-highley/stp-devops-config.git
-    targetRevision: HEAD
+    targetRevision: main
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
+      selfHeal: true
 ---

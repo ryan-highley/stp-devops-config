@@ -2,14 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: keycloak
+  name: gitlab-system
   namespace: openshift-gitops
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: Keycloak Project
+  description: GitLab Repo Project
   destinations:
-    - namespace: keycloak
+    - namespace: gitlab-system
       server: https://kubernetes.default.svc
       name: in-cluster
   namespaceResourceWhitelist:
@@ -21,15 +21,21 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: keycloak
+  name: gitlab-system
   namespace: openshift-gitops
 spec:
   destination:
-    namespace: keycloak
+    namespace: gitlab-system
     server: https://kubernetes.default.svc
-  project: keycloak
+  project: gitlab-system
   source:
-    path: red-hat-keycloak
+    directory:
+      recurse: true
+    path: gitlab-system
     repoURL: https://github.com/ryan-highley/stp-devops-config.git
     targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
 ---
