@@ -15,6 +15,9 @@ patches:
         name: cert-manager
       spec:
         description: 'cert-manager Project'
+        destinations:
+          - name: in-cluster
+            namespace: '*'
     options:
       allowNameChange: true
 
