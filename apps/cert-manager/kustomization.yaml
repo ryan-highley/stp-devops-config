@@ -2,6 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../../../operator-manifests/cert-manager
+  - ../../operator-manifests/cert-manager
   - ClusterIssuer_selfsigned-cluster-issuer.yaml
 
