@@ -1,8 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: gitlab-system
-
 resources:
   - gitlab-operator-openshift-1.11.3.yaml
-  - gitlab-repo.yaml
+  - gitlab-system.yaml
