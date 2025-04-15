@@ -5,5 +5,3 @@ namespace: stp-devops-keycloak
 
 resources:
   - Subscription_rhbk-operator.yaml
-  - Certificate_demo-tls.yaml
-  - Keycloak_stp-devops-keycloak.yaml
