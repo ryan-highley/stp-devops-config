@@ -15,9 +15,6 @@ patches:
         name: red-hat-keycloak
       spec:
         description: 'Red Hat build of Keycloak Project'
-      syncPolicy:
-        syncOptions:
-          - CreateNamespace=true
     options:
       allowNameChange: true
 
