@@ -15,6 +15,9 @@ patches:
         name: cert-manager-operator
       spec:
         description: 'cert-manager-operator Project'
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
     options:
       allowNameChange: true
 
