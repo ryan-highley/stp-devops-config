@@ -1,11 +1,15 @@
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: red-hat-keycloak
+  labels:
+    openshift.io/cluster-monitoring: "true"
+---
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
-  name: stp-devops-keycloak
-  annotations:
-    argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/sync-wave: "-1"
+  name: red-hat-keycloak
 spec:
   upgradeStrategy: Default
 ---
@@ -15,9 +19,6 @@ metadata:
   labels:
     operators.coreos.com/rhbk-operator.stp-devops-keycloak: ''
   name: rhbk-operator
-  annotations:
-    argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/sync-wave: "-1"
 spec:
   channel: stable-v26.0
   installPlanApproval: Automatic
