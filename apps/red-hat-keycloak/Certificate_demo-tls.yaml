@@ -15,7 +15,7 @@ spec:
     - server auth
   commonName: keycloak.apps-crc.testing
   dnsNames:
-    - stp-devops-keycloak-ingress-keycloak.apps-crc.testing
+    - stp-devops-keycloak-ingress-red-hat-keycloak.apps-crc.testing
   issuerRef:
     name: local-ca-issuer
     kind: ClusterIssuer

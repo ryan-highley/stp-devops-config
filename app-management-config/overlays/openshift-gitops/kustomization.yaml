@@ -15,6 +15,11 @@ patches:
         name: openshift-gitops
       spec:
         description: 'OpenShift GitOps Project'
+        destinations:
+          - name: in-cluster
+            server: https://kubernetes.default.svc
+            namespace: openshift-gitops
+
     options:
       allowNameChange: true
 

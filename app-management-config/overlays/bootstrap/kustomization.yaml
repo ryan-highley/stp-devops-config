@@ -4,6 +4,5 @@ kind: Kustomization
 resources:
   - Namespace_bootstrap-namespaces.yaml
   - ../openshift-gitops
-  - ../cert-manager-operator
   - ../cert-manager
   - ../red-hat-keycloak

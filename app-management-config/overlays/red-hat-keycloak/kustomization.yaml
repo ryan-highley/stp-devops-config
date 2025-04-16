@@ -15,6 +15,11 @@ patches:
         name: red-hat-keycloak
       spec:
         description: 'Red Hat build of Keycloak Project'
+        destinations:
+          - name: in-cluster
+            server: https://kubernetes.default.svc
+            namespace: red-hat-keycloak
+
     options:
       allowNameChange: true
 

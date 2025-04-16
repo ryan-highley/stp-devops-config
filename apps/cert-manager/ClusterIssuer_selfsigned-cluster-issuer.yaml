@@ -5,6 +5,13 @@ metadata:
 spec:
   selfSigned: {}
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager
+  labels:
+    openshift.io/cluster-monitoring: "true"
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:

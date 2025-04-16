@@ -8,10 +8,6 @@ replacements:
       fieldPath: metadata.name
     targets:
       - select:
-          kind: AppProject
-        fieldPaths:
-          - spec.destinations.0.namespace
-      - select:
           kind: Application
         fieldPaths:
           - metadata.name
@@ -31,3 +27,15 @@ replacements:
           kind: Application
         fieldPaths:
           - spec.destination.namespace
+        options:
+          create: true
+  - source:
+      kind: AppProject
+      fieldPath: spec.destinations.0.server
+    targets:
+      - select:
+          kind: Application
+        fieldPaths:
+          - spec.destination.server
+        options:
+          create: true

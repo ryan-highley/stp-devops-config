@@ -7,10 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   description: PLACEHOLDER
-  destinations:
-    - namespace: PLACEHOLDER
-      server: https://kubernetes.default.svc
-      name: in-cluster
+  destinations: []
   namespaceResourceWhitelist:
     - group: '*'
       kind: '*'
@@ -22,9 +19,7 @@ kind: Application
 metadata:
   name: PLACEHOLDER
 spec:
-  destination:
-    namespace: PLACEHOLDER
-    server: https://kubernetes.default.svc
+  destination: {}
   project: PLACEHOLDER
   source:
     path: apps
