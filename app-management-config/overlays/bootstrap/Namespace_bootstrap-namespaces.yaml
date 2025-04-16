@@ -5,13 +5,13 @@ metadata:
   name: cert-manager-operator
   labels:
     openshift.io/cluster-monitoring: "true"
-# ---
-# apiVersion: v1
-# kind: Namespace
-# metadata:
-#   name: cert-manager
-#   labels:
-#     openshift.io/cluster-monitoring: "true"
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager
+  labels:
+    openshift.io/cluster-monitoring: "true"
 ---
 apiVersion: v1
 kind: Namespace
