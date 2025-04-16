@@ -4,6 +4,7 @@ kind: OperatorGroup
 metadata:
   name: stp-devops-keycloak
   annotations:
+    argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/sync-wave: "-1"
 spec:
   upgradeStrategy: Default
@@ -15,6 +16,7 @@ metadata:
     operators.coreos.com/rhbk-operator.stp-devops-keycloak: ''
   name: rhbk-operator
   annotations:
+    argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/sync-wave: "-1"
 spec:
   channel: stable-v26.0
