@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: cert-manager
 
 resources:
+  - ../../operator-manifests/cert-manager-operator
   - ClusterIssuer_selfsigned-cluster-issuer.yaml
 
