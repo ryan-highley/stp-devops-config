@@ -3,7 +3,6 @@ kind: Kustomization
 
 resources:
   - ../base
-  - Group_cluster-admins.yaml
   - ClusterRoleBinding_argocd-application-controller.yaml
 
 patches:
