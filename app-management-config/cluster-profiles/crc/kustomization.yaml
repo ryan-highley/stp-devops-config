@@ -3,5 +3,7 @@ kind: Kustomization
 
 resources:
   - ../base
+  - ../../../operator-manifests/cert-manager-operator
+  - ../../../operator-manifests/red-hat-keycloak
   - ../../argocd-manifests/cert-manager
   - ../../argocd-manifests/red-hat-keycloak
