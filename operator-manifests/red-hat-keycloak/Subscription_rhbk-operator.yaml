@@ -3,6 +3,8 @@ apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
   name: stp-devops-keycloak
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   upgradeStrategy: Default
 ---
@@ -12,6 +14,8 @@ metadata:
   labels:
     operators.coreos.com/rhbk-operator.stp-devops-keycloak: ''
   name: rhbk-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   channel: stable-v26.0
   installPlanApproval: Automatic

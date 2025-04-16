@@ -2,8 +2,6 @@ apiVersion: k8s.keycloak.org/v2alpha1
 kind: Keycloak
 metadata:
   name: stp-devops-keycloak
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
 spec:
   http:
     tlsSecret: demo-tls-secret

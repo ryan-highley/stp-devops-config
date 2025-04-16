@@ -3,6 +3,8 @@ apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
   name: cert-manager-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   upgradeStrategy: Default
 ---
@@ -12,6 +14,8 @@ metadata:
   labels:
     operators.coreos.com/openshift-cert-manager-operator.cert-manager-operator: ''
   name: openshift-cert-manager-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   channel: stable-v1
   installPlanApproval: Automatic
