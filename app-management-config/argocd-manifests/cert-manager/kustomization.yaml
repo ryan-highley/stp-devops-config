@@ -2,9 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../../base
-  - Group_cluster-admins.yaml
-  - ClusterRoleBinding_argocd-application-controller.yaml
+  - ../base
 
 patches:
   - target:
@@ -14,16 +12,21 @@ patches:
       apiVersion: argoproj.io/v1alpha1
       kind: AppProject
       metadata:
-        name: openshift-gitops
+        name: cert-manager
       spec:
-        description: 'OpenShift GitOps Project'
+        description: 'cert-manager Project'
         destinations:
           - name: in-cluster
             server: https://kubernetes.default.svc
-            namespace: openshift-gitops
+            namespace: '*'
+        clusterResourceWhitelist:
+          - group: cert-manager.io
+            kind: ClusterIssuer
+          - group: '*'
+            kind: Namespace
 
     options:
       allowNameChange: true
 
 transformers:
-  - ../../base/transformers
+  - ../base/transformers
