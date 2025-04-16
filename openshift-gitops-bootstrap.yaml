@@ -80,7 +80,7 @@ spec:
     server: https://kubernetes.default.svc
   project: bootstrap-cluster
   source:
-    path: app-management-config/overlays/bootstrap/
+    path: app-management-config/cluster-profiles/base/
     repoURL: https://github.com/ryan-highley/stp-devops-config.git
     targetRevision: main
   syncPolicy:
