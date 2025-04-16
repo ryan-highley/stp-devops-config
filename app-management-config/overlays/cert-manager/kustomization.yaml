@@ -20,7 +20,7 @@ patches:
             server: https://kubernetes.default.svc
             namespace: '*'
         clusterResourceWhitelist:
-          - group: cert-manager.io/v1
+          - group: cert-manager.io
             kind: ClusterIssuer
 
     options:
