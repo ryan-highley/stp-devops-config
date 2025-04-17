@@ -5,8 +5,8 @@ metadata:
   namespace: openshift-gitops
 spec:
   destination:
-    - namespace: '*'
-      server: https://kubernetes.default.svc
+    namespace: '*'
+    server: https://kubernetes.default.svc
   project: cluster-profile-operators
   source:
     repoURL: https://github.com/ryan-highley/stp-devops-config.git
