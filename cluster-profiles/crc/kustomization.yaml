@@ -3,5 +3,5 @@ kind: Kustomization
 
 resources:
   - ../base
-  - ../../manifests/operator/red-hat-keycloak
-  - ../../manifests/argocd/red-hat-keycloak
+  - ../../argocd/cluster-profiles/crc
+  - ../../argocd/app/stp-devops-keycloak

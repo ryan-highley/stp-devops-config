@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-operator
+  namespace: openshift-gitops
+spec:
+  destination:
+    - namespace: '*'
+      server: https://kubernetes.default.svc
+  project: cluster-profile-operators
+  source:
+    repoURL: https://github.com/ryan-highley/stp-devops-config.git
+    path: manifests/operator/cert-manager-operator
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ApplyOutOfSyncOnly=true

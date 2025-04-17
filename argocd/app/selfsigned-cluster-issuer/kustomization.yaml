@@ -12,16 +12,13 @@ patches:
       apiVersion: argoproj.io/v1alpha1
       kind: AppProject
       metadata:
-        name: cert-manager
+        name: selfsigned-cluster-issuer
       spec:
-        description: 'cert-manager Project'
+        description: 'selfsigned-cluster-issuer Project'
         destinations:
           - name: in-cluster
             server: https://kubernetes.default.svc
-            namespace: '*'
-        clusterResourceWhitelist:
-          - group: '*'
-            kind: '*'
+            namespace: cert-manager
 
     options:
       allowNameChange: true

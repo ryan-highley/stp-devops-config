@@ -12,16 +12,13 @@ patches:
       apiVersion: argoproj.io/v1alpha1
       kind: AppProject
       metadata:
-        name: red-hat-keycloak
+        name: stp-devops-keycloak
       spec:
-        description: 'Red Hat build of Keycloak Project'
+        description: 'stp-devops-keycloak Project'
         destinations:
           - name: in-cluster
             server: https://kubernetes.default.svc
             namespace: red-hat-keycloak
-        clusterResourceWhitelist:
-          - group: '*'
-            kind: Namespace
 
     options:
       allowNameChange: true
