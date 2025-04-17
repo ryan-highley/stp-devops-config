@@ -11,6 +11,8 @@ kind: OperatorGroup
 metadata:
   name: red-hat-keycloak
 spec:
+  targetNamespaces:
+    - red-hat-keycloak
   upgradeStrategy: Default
 ---
 apiVersion: operators.coreos.com/v1alpha1

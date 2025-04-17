@@ -4,6 +4,5 @@ kind: Kustomization
 namespace: red-hat-keycloak
 
 resources:
-  - ../../operator/red-hat-keycloak
   - Certificate_demo-tls.yaml
   - Keycloak_stp-devops-keycloak.yaml
