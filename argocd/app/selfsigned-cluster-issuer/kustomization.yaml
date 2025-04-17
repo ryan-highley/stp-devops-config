@@ -19,6 +19,9 @@ patches:
           - name: in-cluster
             server: https://kubernetes.default.svc
             namespace: cert-manager
+        clusterResourceWhitelist:
+          - group: cert-manager.io
+            kind: ClusterIssuer
 
     options:
       allowNameChange: true
