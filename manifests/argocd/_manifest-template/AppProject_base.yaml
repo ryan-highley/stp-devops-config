@@ -22,7 +22,7 @@ spec:
   destination: {}
   project: PLACEHOLDER
   source:
-    path: apps
+    path: manifests/app
     repoURL: https://github.com/ryan-highley/stp-devops-config.git
     targetRevision: main
   syncPolicy:
