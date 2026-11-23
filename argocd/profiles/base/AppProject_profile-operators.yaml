@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: profile-operators
+  namespace: openshift-gitops
+  labels:
+    stp-devops-argocd-type: operator
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: 'Project supporting all Operators required for a profile'
+  destinations:
+    - name: in-cluster
+      server: https://kubernetes.default.svc
+      namespace: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  sourceRepos:
+    - '*'

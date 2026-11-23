@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ../base
   - ../../argocd/cluster-profiles/crc
-  - ../../argocd/app/stp-devops-keycloak
+  - ../../argocd/app/red-hat-keycloak

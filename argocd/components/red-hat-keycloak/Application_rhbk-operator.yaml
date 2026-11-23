@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rhbk-operator
+  namespace: openshift-gitops
+  labels:
+    stp-devops-argocd-type: operator
+spec:
+  destination:
+    namespace: '*'
+    server: https://kubernetes.default.svc
+  project: profile-operators
+  source:
+    repoURL: https://github.com/ryan-highley/stp-devops-config.git
+    path: manifests/operator/rhbk-operator
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ApplyOutOfSyncOnly=true

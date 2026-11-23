@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openshift-pipelines-operator-rh
+  namespace: openshift-gitops
+  labels:
+    stp-devops-argocd-type: operator
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: https://kubernetes.default.svc
+  project: profile-operators
+  source:
+    repoURL: https://github.com/ryan-highley/stp-devops-config.git
+    path: manifests/operator/pipelines
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ApplyOutOfSyncOnly=true

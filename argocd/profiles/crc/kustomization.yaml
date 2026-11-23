@@ -3,9 +3,14 @@ kind: Kustomization
 
 namePrefix: crc-
 
+components:
+  - ../../components/cert-manager
+  - ../../components/gitea
+  - ../../components/openshift-gitops
+  - ../../components/red-hat-keycloak
+
 resources:
-  - operators/
-  - applications/
+  - ../base
 
 patches:
   - target:

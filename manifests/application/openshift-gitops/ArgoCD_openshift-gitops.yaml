@@ -2,21 +2,43 @@ apiVersion: argoproj.io/v1beta1
 kind: ArgoCD
 metadata:
   name: openshift-gitops
-  finalizers:
-    - argoproj.io/finalizer
+  namespace: openshift-gitops
 spec:
-  controller:
+  applicationSet:
     resources:
       limits:
-        cpu: '2'
+        cpu: "2"
+        memory: 1Gi
+      requests:
+        cpu: 250m
+        memory: 512Mi
+    webhookServer:
+      ingress:
+        enabled: false
+      route:
+        enabled: false
+  commitServer: {}
+  controller:
+    processors: {}
+    resources:
+      limits:
+        cpu: "2"
         memory: 2Gi
       requests:
         cpu: 250m
         memory: 1Gi
+    sharding: {}
   grafana:
     enabled: false
     ingress:
       enabled: false
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
     route:
       enabled: false
   ha:
@@ -28,9 +50,12 @@ spec:
       requests:
         cpu: 250m
         memory: 128Mi
+  imageUpdater:
+    enabled: false
   initialSSHKnownHosts: {}
   monitoring:
     enabled: false
+  networkPolicy: {}
   notifications:
     enabled: false
   prometheus:
@@ -40,11 +65,11 @@ spec:
     route:
       enabled: false
   rbac:
-    defaultPolicy: ''
+    defaultPolicy: ""
     policy: |
       g, system:cluster-admins, role:admin
       g, cluster-admins, role:admin
-    scopes: '[groups]'
+    scopes: "[groups]"
   redis:
     resources:
       limits:
@@ -56,12 +81,80 @@ spec:
   repo:
     resources:
       limits:
-        cpu: '1'
+        cpu: "1"
         memory: 1Gi
       requests:
         cpu: 250m
         memory: 256Mi
   resourceExclusions: |
+    - apiGroups:
+      - ""
+      - discovery.k8s.io
+      clusters:
+      - '*'
+      kinds:
+      - Endpoints
+      - EndpointSlice
+    - apiGroups:
+      - apiregistration.k8s.io
+      clusters:
+      - '*'
+      kinds:
+      - APIService
+    - apiGroups:
+      - coordination.k8s.io
+      clusters:
+      - '*'
+      kinds:
+      - Lease
+    - apiGroups:
+      - authentication.k8s.io
+      - authorization.k8s.io
+      clusters:
+      - '*'
+      kinds:
+      - SelfSubjectReview
+      - TokenReview
+      - LocalSubjectAccessReview
+      - SelfSubjectAccessReview
+      - SelfSubjectRulesReview
+      - SubjectAccessReview
+    - apiGroups:
+      - certificates.k8s.io
+      clusters:
+      - '*'
+      kinds:
+      - CertificateSigningRequest
+    - apiGroups:
+      - cert-manager.io
+      clusters:
+      - '*'
+      kinds:
+      - CertificateRequest
+    - apiGroups:
+      - cilium.io
+      clusters:
+      - '*'
+      kinds:
+      - CiliumIdentity
+      - CiliumEndpoint
+      - CiliumEndpointSlice
+    - apiGroups:
+      - kyverno.io
+      - reports.kyverno.io
+      - wgpolicyk8s.io
+      clusters:
+      - '*'
+      kinds:
+      - PolicyReport
+      - ClusterPolicyReport
+      - EphemeralReport
+      - ClusterEphemeralReport
+      - AdmissionReport
+      - ClusterAdmissionReport
+      - BackgroundScanReport
+      - ClusterBackgroundScanReport
+      - UpdateRequest
     - apiGroups:
       - tekton.dev
       clusters:
@@ -86,6 +179,9 @@ spec:
         memory: 128Mi
     route:
       enabled: true
+    service:
+      type: ""
+  sourceHydrator: {}
   sso:
     dex:
       openShiftOAuth: true

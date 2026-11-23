@@ -5,3 +5,5 @@ namespace: openshift-gitops
 
 resources:
   - ArgoCD_openshift-gitops.yaml
+  - ClusterRole_openshift-gitops-cluster-issuer-cluster-role.yaml
+  - ClusterRole_openshift-gitops-secrets-cluster-role.yaml
