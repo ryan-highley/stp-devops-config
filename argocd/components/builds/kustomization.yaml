@@ -3,3 +3,6 @@ kind: Component
 
 resources:
   - Application_openshift-builds-operator.yaml
+
+components:
+  - ../pipelines

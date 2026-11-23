@@ -7,6 +7,10 @@ components:
   - ../../components/cert-manager
   - ../../components/gitea
   - ../../components/openshift-gitops
+  - ../../components/eap
+  - ../../components/jws-operator
+  - ../../components/builds
+  - ../../components/developer-hub
 
 resources:
   - ../base
