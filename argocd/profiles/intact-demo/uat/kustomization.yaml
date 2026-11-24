@@ -3,12 +3,8 @@ kind: Kustomization
 
 namePrefix: uat-
 
-components:
-  - ../../../components/eap-todo-backend
-  - ../../../components/jws-tomcat-websocket-chat
-
 resources:
-  - ../../base
+  - ../base
 
 patches:
   - target:
@@ -18,10 +14,50 @@ patches:
       - op: replace
         path: /spec/project
         value: uat-profile-applications
-  - target:
+
+  - patch: |-
+      apiVersion: argoproj.io/v1alpha1
       kind: Application
-      labelSelector: "stp-devops-argocd-type=operator"
-    patch: |-
-      - op: replace
-        path: /spec/project
-        value: uat-profile-operators
+      metadata:
+        name: eap-todo-backend
+      spec:
+        destination:
+          namespace: uat-eap-todo-backend
+        source:
+          kustomize:
+            patches:
+              - patch: |-
+                  apiVersion: shipwright.io/v1beta1
+                  kind: Build
+                  metadata:
+                    name: eap-todo-backend
+                  spec:
+                    output:
+                      image: image-registry.openshift-image-registry.svc:5000/uat-eap-todo-backend/eap-todo-backend:latest
+            images:
+              - name: image-registry.openshift-image-registry.svc:5000/eap-todo-backend/eap-todo-backend
+                newName: image-registry.openshift-image-registry.svc:5000/uat-eap-todo-backend/eap-todo-backend
+
+
+  - patch: |-
+      apiVersion: argoproj.io/v1alpha1
+      kind: Application
+      metadata:
+        name: jws-tomcat-websocket-chat
+      spec:
+        destination:
+          namespace: uat-jws-tomcat-websocket-chat
+        source:
+          kustomize:
+            patches:
+              - patch: |-
+                  apiVersion: shipwright.io/v1beta1
+                  kind: Build
+                  metadata:
+                    name: jws-tomcat-websocket-chat
+                  spec:
+                    output:
+                      image: image-registry.openshift-image-registry.svc:5000/uat-jws-tomcat-websocket-chat/jws-tomcat-websocket-chat:latest
+            images:
+              - name: image-registry.openshift-image-registry.svc:5000/jws-tomcat-websocket-chat/jws-tomcat-websocket-chat
+                newName: image-registry.openshift-image-registry.svc:5000/uat-jws-tomcat-websocket-chat/jws-tomcat-websocket-chat

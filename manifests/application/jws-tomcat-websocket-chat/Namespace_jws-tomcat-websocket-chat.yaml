@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: jws-tomcat-websocket-chat
-  labels:
-    openshift.io/user-monitoring: "true"
