@@ -5,7 +5,7 @@ namePrefix: rosa-
 
 components:
   - ../../components/cert-manager
-  - ../../components/gitea
+  # - ../../components/gitea
   - ../../components/openshift-gitops
   - ../../components/eap
   - ../../components/jws-operator
