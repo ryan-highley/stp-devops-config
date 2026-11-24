@@ -5,6 +5,4 @@ resources:
   - Build_jws-tomcat-websocket-chat.yaml
   - BuildRun_jws-tomcat-websocket-chat.yaml
   - WebServer_jws-tomcat-websocket-chat.yaml
-  # - Deployment_jws-tomcat-websocket-chat.yaml
-  # - Service_jws-tomcat-websocket-chat.yaml
-  # - Route_jws-tomcat-websocket-chat.yaml
+  - Route_jws-tomcat-websocket-chat.yaml

@@ -1,9 +1,12 @@
 apiVersion: web.servers.org/v1alpha1
 kind: WebServer
 metadata:
-    name: jws-tomcat-websocket-chat
+  name: jws-tomcat-websocket-chat
 spec:
-    applicationName: jws-tomcat-websocket-chat
-    replicas: 1
-webImage:
-   applicationImage: image-registry.openshift-image-registry.svc:5000/jws-tomcat-websocket-chat/jws-tomcat-websocket-chat:latest
+  applicationName: jws-tomcat-websocket-chat
+  replicas: 1
+  tlsConfig:
+    routeHostname: NONE
+  webImageStream:
+    imageStreamName: jws-tomcat-websocket-chat
+    imageStreamNamespace: jws-tomcat-websocket-chat
