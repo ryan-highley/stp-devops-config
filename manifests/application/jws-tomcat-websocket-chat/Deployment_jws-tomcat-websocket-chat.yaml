@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: jws-tomcat-websocket-chat
+  name: jws-tomcat-websocket-chat
+spec:
+  selector:
+    matchLabels:
+      app: jws-tomcat-websocket-chat
+  template:
+    metadata:
+      labels:
+        app: jws-tomcat-websocket-chat
+    spec:
+      containers:
+        - name: jws-tomcat
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/jws-tomcat-websocket-chat/jws-tomcat-websocket-chat:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env: []

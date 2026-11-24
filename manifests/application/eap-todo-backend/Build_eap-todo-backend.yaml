@@ -1,0 +1,19 @@
+apiVersion: shipwright.io/v1beta1
+kind: Build
+metadata:
+  name: eap-todo-backend
+spec:
+  output:
+    image: image-registry.openshift-image-registry.svc:5000/eap-todo-backend/eap-todo-backend:latest
+  paramValues:
+    - name: builder-image
+      value: image-registry.openshift-image-registry.svc:5000/openshift/jboss-eap81-openjdk21-builder-rhel9:latest
+  source:
+    contextDir: todo-backend
+    git:
+      revision: EAP_8.1.0.GA
+      url: https://github.com/jboss-developer/jboss-eap-quickstarts.git
+    type: Git
+  strategy:
+    kind: ClusterBuildStrategy
+    name: source-to-image

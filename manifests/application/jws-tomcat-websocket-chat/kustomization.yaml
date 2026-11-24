@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: jws-tomcat-websocket-chat
+
+resources:
+  - Build_jws-tomcat-websocket-chat.yaml
+  - BuildRun_jws-tomcat-websocket-chat.yaml
+  - Deployment_jws-tomcat-websocket-chat.yaml
+  - Service_jws-tomcat-websocket-chat.yaml
+  - Route_jws-tomcat-websocket-chat.yaml

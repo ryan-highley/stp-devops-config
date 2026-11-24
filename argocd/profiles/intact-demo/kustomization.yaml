@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+components:
+  - ../../components/eap-todo-backend
+  - ../../components/jws-tomcat-websocket-chat
+
+resources:
+  - ../rosa
+
+patches:
+  - target:
+      kind: Application
+      labelSelector: "stp-devops-argocd-type=application"
+    patch: |-
+      - op: replace
+        path: /spec/project
+        value: rosa-profile-applications
+  - target:
+      kind: Application
+      labelSelector: "stp-devops-argocd-type=operator"
+    patch: |-
+      - op: replace
+        path: /spec/project
+        value: rosa-profile-operators

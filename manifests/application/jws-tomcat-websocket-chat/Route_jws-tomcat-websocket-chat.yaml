@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: jws-tomcat-websocket-chat
+spec:
+  to:
+    kind: Service
+    name: jws-tomcat-websocket-chat
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

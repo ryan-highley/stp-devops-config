@@ -1,0 +1,19 @@
+apiVersion: shipwright.io/v1beta1
+kind: Build
+metadata:
+  name: jws-tomcat-websocket-chat
+spec:
+  output:
+    image: image-registry.openshift-image-registry.svc:5000/jws-tomcat-websocket-chat/jws-tomcat-websocket-chat:latest
+  paramValues:
+    - name: builder-image
+      value: image-registry.openshift-image-registry.svc:5000/openshift/jboss-webserver70-openjdk21-tomcat11-openshift-ubi9:7.0.0
+  source:
+    contextDir: tomcat-websocket-chat
+    git:
+      revision: main
+      url: https://github.com/web-servers/tomcat-websocket-chat-quickstart.git
+    type: Git
+  strategy:
+    kind: ClusterBuildStrategy
+    name: source-to-image

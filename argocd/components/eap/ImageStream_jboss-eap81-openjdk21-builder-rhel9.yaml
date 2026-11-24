@@ -1,0 +1,18 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: jboss-eap81-openjdk21-builder-rhel9
+  namespace: openshift
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+  - annotations: null
+    from:
+      kind: DockerImage
+      name: registry.redhat.io/jboss-eap-8/eap81-openjdk21-builder-openshift-rhel9:latest
+    generation: null
+    importPolicy: {}
+    name: ""
+    referencePolicy:
+      type: Local
