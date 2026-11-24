@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: jws-tomcat-websocket-chat
   name: jws-tomcat-websocket-chat
 spec:
   selector:
