@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jws-tomcat-websocket-chat
+  namespace: openshift-gitops
+spec:
+  project: uat-profile-applications
+  destination:
+    namespace: uat-jws-tomcat-websocket-chat
+  source:
+    kustomize:
+      namePrefix: uat-
+      patches:
+        - patch: |-
+            apiVersion: shipwright.io/v1beta1
+            kind: Build
+            metadata:
+              name: jws-tomcat-websocket-chat
+            spec:
+              output:
+                image: image-registry.openshift-image-registry.svc:5000/uat-jws-tomcat-websocket-chat/jws-tomcat-websocket-chat:latest
+        - patch: |-
+            apiVersion: shipwright.io/v1beta1
+            kind: BuildRun
+            metadata:
+              name: jws-tomcat-websocket-chat
+            spec:
+              build:
+                name: uat-jws-tomcat-websocket-chat
+        - patch: |-
+            apiVersion: web.servers.org/v1alpha1
+            kind: WebServer
+            metadata:
+                name: jws-tomcat-websocket-chat
+            spec:
+              applicationName: uat-jws-tomcat-websocket-chat
+              webImageStream:
+                 imageStreamNamespace: uat-jws-tomcat-websocket-chat
+        - patch: |-
+            kind: Route
+            apiVersion: route.openshift.io/v1
+            metadata:
+              name: jws-tomcat-websocket-chat
+            spec:
+              to:
+                name: uat-jws-tomcat-websocket-chat

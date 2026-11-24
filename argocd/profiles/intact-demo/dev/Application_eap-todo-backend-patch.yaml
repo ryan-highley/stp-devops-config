@@ -8,31 +8,5 @@ spec:
   destination:
     namespace: dev-eap-todo-backend
   source:
-    kustomize:
-      namePrefix: dev-
-      images:
-        - image-registry.openshift-image-registry.svc:5000/eap-todo-backend/eap-todo-backend=image-registry.openshift-image-registry.svc:5000/dev-eap-todo-backend/eap-todo-backend
-      patches:
-        - patch: |-
-            apiVersion: shipwright.io/v1beta1
-            kind: Build
-            metadata:
-              name: eap-todo-backend
-            spec:
-              output:
-                image: image-registry.openshift-image-registry.svc:5000/dev-eap-todo-backend/eap-todo-backend:latest
-        - patch: |-
-            apiVersion: shipwright.io/v1beta1
-            kind: BuildRun
-            metadata:
-              name: eap-todo-backend
-            spec:
-              build:
-                name: dev-eap-todo-backend
-        - patch: |-
-            apiVersion: wildfly.org/v1alpha1
-            kind: WildFlyServer
-            metadata:
-              name: eap-todo-backend
-            spec:
-              applicationImage: image-registry.openshift-image-registry.svc:5000/dev-eap-todo-backend/eap-todo-backend:latest
+    helm:
+      releaseName: dev-eap-todo-backend
