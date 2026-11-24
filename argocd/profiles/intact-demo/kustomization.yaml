@@ -6,7 +6,7 @@ components:
   - ../../components/jws-tomcat-websocket-chat
 
 resources:
-  - ../rosa
+  - ../base
 
 patches:
   - target:
@@ -15,11 +15,11 @@ patches:
     patch: |-
       - op: replace
         path: /spec/project
-        value: rosa-profile-applications
+        value: intact-demo-profile-applications
   - target:
       kind: Application
       labelSelector: "stp-devops-argocd-type=operator"
     patch: |-
       - op: replace
         path: /spec/project
-        value: rosa-profile-operators
+        value: intact-demo-profile-operators
