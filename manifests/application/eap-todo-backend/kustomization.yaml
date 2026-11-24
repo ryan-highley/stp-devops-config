@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - Build_eap-todo-backend.yaml
   - BuildRun_eap-todo-backend.yaml
-  - Deployment_eap-todo-backend.yaml
-  - Service_eap-todo-backend.yaml
-  - Route_eap-todo-backend.yaml
+  - WildFlyServer_eap-todo-backend.yaml
+  # - Deployment_eap-todo-backend.yaml
+  # - Service_eap-todo-backend.yaml
+  # - Route_eap-todo-backend.yaml

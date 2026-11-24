@@ -11,9 +11,7 @@ spec:
     kustomize:
       namePrefix: dev-
       images:
-        - |
-          name: image-registry.openshift-image-registry.svc:5000/eap-todo-backend/eap-todo-backend
-          newName: image-registry.openshift-image-registry.svc:5000/dev-eap-todo-backend/eap-todo-backend
+        - image-registry.openshift-image-registry.svc:5000/eap-todo-backend/eap-todo-backend=image-registry.openshift-image-registry.svc:5000/dev-eap-todo-backend/eap-todo-backend
       patches:
         - patch: |-
             apiVersion: shipwright.io/v1beta1
@@ -31,3 +29,10 @@ spec:
             spec:
               build:
                 name: dev-eap-todo-backend
+        - patch: |-
+            apiVersion: wildfly.org/v1alpha1
+            kind: WildFlyServer
+            metadata:
+              name: eap-todo-backend
+            spec:
+              applicationImage: image-registry.openshift-image-registry.svc:5000/dev-eap-todo-backend/eap-todo-backend:latest

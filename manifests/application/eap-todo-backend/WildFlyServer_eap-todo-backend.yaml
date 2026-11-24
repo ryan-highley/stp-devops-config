@@ -1,0 +1,7 @@
+apiVersion: wildfly.org/v1alpha1
+kind: WildFlyServer
+metadata:
+  name: eap-todo-backend
+spec:
+  applicationImage: image-registry.openshift-image-registry.svc:5000/eap-todo-backend/eap-todo-backend:latest
+  replicas: 1

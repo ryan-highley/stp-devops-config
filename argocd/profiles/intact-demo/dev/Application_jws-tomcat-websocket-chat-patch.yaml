@@ -10,10 +10,6 @@ spec:
   source:
     kustomize:
       namePrefix: dev-
-      images:
-        - |
-          name: image-registry.openshift-image-registry.svc:5000/jws-tomcat-websocket-chat/jws-tomcat-websocket-chat
-          newName: image-registry.openshift-image-registry.svc:5000/dev-jws-tomcat-websocket-chat/jws-tomcat-websocket-chat
       patches:
         - patch: |-
             apiVersion: shipwright.io/v1beta1
@@ -30,4 +26,21 @@ spec:
               name: jws-tomcat-websocket-chat
             spec:
               build:
+                name: dev-jws-tomcat-websocket-chat
+        - patch: |-
+            apiVersion: web.servers.org/v1alpha1
+            kind: WebServer
+            metadata:
+                name: jws-tomcat-websocket-chat
+            spec:
+              applicationName: dev-jws-tomcat-websocket-chat
+              webImageStream:
+                 imageStreamNamespace: dev-jws-tomcat-websocket-chat
+        - patch: |-
+            kind: Route
+            apiVersion: route.openshift.io/v1
+            metadata:
+              name: jws-tomcat-websocket-chat
+            spec:
+              to:
                 name: dev-jws-tomcat-websocket-chat
